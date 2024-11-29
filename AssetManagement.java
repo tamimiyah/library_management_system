@@ -1,36 +1,50 @@
-public class AssetManagement{
-  System.out.println("********************************************************");
-                    System.out.println("Assets' Information Management");
-                    System.out.println("********************************************************");
-                    System.out.println("[1] Add");
-                    System.out.println("[2] Edit");
-                    System.out.println("[3] Delete");
-                    System.out.println("[4] View");
-                    System.out.println("[5] Back to Main Menu");
-                    int aInfoManChoice = userPrompt.getValidIntegerInput("Enter Choice: ");
+import java.util.ArrayList;
+import java.util.Scanner;
 
-                    switch (aInfoManChoice) {
-                        case 1:
-                            ClearScreen();
-                            AddMaterial();
-                            break;
-                        case 2:
-                            ClearScreen();
-                            EditMaterial();
-                            break;
-                        case 3:
-                            ClearScreen();
-                            DeleteMaterial();
-                            break;
-                        case 4:
-                            ClearScreen();
-                            ViewMaterials();
-                            break;
-                        case 5:
-                            continue;
-                    }
-}
+public class AssetsManagement {
 
+    private static ArrayList<Material> library = new ArrayList<>();
+    private static userPrompt userPrompt = new userPrompt();
+    private static Scanner input = new Scanner(System.in);
+
+    public static void manageAssets() {
+        boolean continueManaging = true;
+
+        while (continueManaging) {
+            ClearScreen();
+            System.out.println("********************************************************");
+            System.out.println("              Assets Management");
+            System.out.println("********************************************************");
+            System.out.println("[1] Add Material");
+            System.out.println("[2] Edit Material");
+            System.out.println("[3] Delete Material");
+            System.out.println("[4] View Materials");
+            System.out.println("[5] Back to Main Menu");
+
+            int choice = userPrompt.getValidIntegerInput("Enter Choice: ");
+
+            switch (choice) {
+                case 1:
+                    AddMaterial();
+                    break;
+                case 2:
+                    EditMaterial();
+                    break;
+                case 3:
+                    DeleteMaterial();
+                    break;
+                case 4:
+                    ViewMaterials();
+                    break;
+                case 5:
+                    continueManaging = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please select a valid option.");
+                    break;
+            }
+        }
+    }
 private static void AddMaterial() {
         boolean continueAdding = true;
         while (continueAdding) {
