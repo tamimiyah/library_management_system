@@ -1,38 +1,50 @@
-public class BorrowerManagement{
-  ClearScreen();
-                    System.out.println("********************************************************");
-                    System.out.println("Borrowers' Information Management");
-                    System.out.println("********************************************************");
-                    System.out.println("[1] Add");
-                    System.out.println("[2] Edit");
-                    System.out.println("[3] Delete");
-                    System.out.println("[4] View");
-                    System.out.println("[5] Back to Main Menu");
-                    int bInfoManChoice = userPrompt.getValidIntegerInput("Enter Choice: ");
+import java.util.ArrayList;
+import java.util.Scanner;
 
-                    switch (bInfoManChoice) {
-                        case 1:
-                            ClearScreen();
-                            AddBorrower();
-                            break;
-                        case 2:
-                            ClearScreen();
-                            EditBorrower();
-                            break;
-                        case 3:
-                            ClearScreen();
-                            DeleteBorrower();
-                            break;
-                        case 4:
-                            ClearScreen();
-                            ViewBorrower();
-                            break;
-                        case 5:
-                            continue;
-                    }
+public class BorrowersManagement {
 
+    private static ArrayList<Borrowers> borrowers = new ArrayList<>();
+    private static userPrompt userPrompt = new userPrompt();
+    private static Scanner input = new Scanner(System.in);
+
+    public static void manageBorrowers() {
+        boolean continueManaging = true;
+
+        while (continueManaging) {
+            ClearScreen();
+            System.out.println("********************************************************");
+            System.out.println("              Borrowers Management");
+            System.out.println("********************************************************");
+            System.out.println("[1] Add Borrower");
+            System.out.println("[2] Edit Borrower");
+            System.out.println("[3] Delete Borrower");
+            System.out.println("[4] View Borrowers");
+            System.out.println("[5] Back to Main Menu");
+
+            int choice = userPrompt.getValidIntegerInput("Enter Choice: ");
+
+            switch (choice) {
+                case 1:
+                    AddBorrower();
                     break;
-}
+                case 2:
+                    EditBorrower();
+                    break;
+                case 3:
+                    DeleteBorrower();
+                    break;
+                case 4:
+                    ViewBorrowers();
+                    break;
+                case 5:
+                    continueManaging = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please select a valid option.");
+                    break;
+            }
+        }
+    }
 
 private static void AddBorrower() {
         loadBorrowersFromFile();
